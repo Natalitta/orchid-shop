@@ -18,19 +18,23 @@ def get_bought_num():
     Requests a number from the user
     for each colour of orchids bought to the stock.
     """
-    print("." * 50)
-    print("Please enter the number of orchids you ordered to sale.")
-    print("Type numbers separated by comma in the following order:\n")
-    print(" white\n pink\n yellow\n purple\n")
-    print("Example: 25, 30, 50, 45")
-    print("." * 50)
+    while True:
+        print("." * 50)
+        print("Please enter the number of orchids you ordered to sale.")
+        print("Type numbers separated by comma in the following order:\n")
+        print(" white\n pink\n yellow\n purple\n")
+        print("Example: 25, 30, 50, 45")
+        print("." * 50)
 
-    bought_num = input("Enter numbers here: ")
-    print(f"Your entered {bought_num}\n")
+        bought_num = input("Enter numbers here: ")
+        print(f"Your entered {bought_num}\n")
 
-    bought_num_data = bought_num.split(",")
-    
-    valid_data(bought_num_data)
+        bought_num_data = bought_num.split(",")
+        
+        if valid_data(bought_num_data):
+            print("Data is valid")
+            break
+    return bought_num_data
 
 
 def valid_data(values):
@@ -47,6 +51,9 @@ def valid_data(values):
                 )
     except ValueError as e:
         print(f"Invalid data: {e}, try again, please.\n")
+        return False
+
+    return True
 
 
-get_bought_num()
+bought_data = get_bought_num()
