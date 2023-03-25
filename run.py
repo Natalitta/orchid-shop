@@ -12,16 +12,40 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('orchid-shop')
 
-def get_colour():
+
+def get_bought_num():
     """
-    Requests the colour of orchids from the user 
+    Requests a number from the user 
+    for each colour of orchids bought to the stock.
     """
     print("." * 40)
-    print("Please enter the colour you'd like to enter data about.")
-    print("Type w for white, p for pink, y for yellow, p for purple.")
+    print("Please enter the number of orchids you ordered to sale.")
+    print("Type numbers separated by comma in the following order:\n")
+    print(" white\n pink\n yellow\n purple\n")
+    print("Example: 25, 30, 50, 45")
     print("." * 40)
 
-    colour = input("Enter the letter here: ")
-    print(f"Your entered {colour}")
+    bought_num = input("Enter numbers here: ")
+    print(f"Your entered {bought_num}\n")
 
-get_colour()
+    bought_num_data = bought_num.split(",")
+    
+    valid_data(bought_num_data)
+
+
+def valid_data(values):
+    """
+    Validates the user's input to be a list of 4 numbers.
+    If there are not exactly 4 numbers 
+    or they are not numbers, raises ValueError.
+    """
+    try:
+        if len(values) != 4:
+            raise ValueError(
+                f"You should enter 4 numbers. You entered {len(values)}"
+                )
+    except ValueError as e:
+        print(f"Invalid data: {e}, try again, please.\n")
+
+
+get_bought_num()
