@@ -12,8 +12,16 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('orchid-shop')
 
-sales = SHEET.worksheet('sales')
+def get_colour():
+    """
+    Requests the colour of orchids from the user 
+    """
+    print("." * 40)
+    print("Please enter the colour you'd like to enter data about.")
+    print("Type w for white, p for pink, y for yellow, p for purple.")
+    print("." * 40)
 
-data = sales.get_all_values()
+    colour = input("Enter the letter here: ")
+    print(f"Your entered {colour}")
 
-print(data)
+get_colour()
