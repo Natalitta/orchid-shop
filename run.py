@@ -17,6 +17,9 @@ def get_bought_num():
     """
     Requests a number from the user
     for each colour of orchids bought to the stock.
+    A while loop will ask for the input all over again
+    until the data entered is valid. 
+    There mush be exactly 4 numbers separated by commas.
     """
     while True:
         print("." * 50)
@@ -32,7 +35,7 @@ def get_bought_num():
         bought_num_data = bought_num.split(",")
         
         if valid_data(bought_num_data):
-            print("Data is valid")
+            print("Data is valid\n")
             break
     return bought_num_data
 
@@ -56,4 +59,17 @@ def valid_data(values):
     return True
 
 
+def update_bought_worksheet(bought_data):
+    """
+    Updates the bought worksheet with numbers of items bought to stock.
+    Adds a new row of data to the list.
+    """
+    print("Updating the worksheet with new information...\n")
+    bought_worksheet = SHEET.worksheet("bought")
+    bought_worksheet.append_row(bought_data)
+    print("Worksheet updated successfully\n")
+
+
 bought_data = get_bought_num()
+bought_data_int = [int(num) for num in bought_data]
+update_bought_worksheet(bought_data_int)
