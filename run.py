@@ -15,15 +15,15 @@ SHEET = GSPREAD_CLIENT.open('orchid-shop')
 
 def get_bought_num():
     """
-    Requests a number from the user 
+    Requests a number from the user
     for each colour of orchids bought to the stock.
     """
-    print("." * 40)
+    print("." * 50)
     print("Please enter the number of orchids you ordered to sale.")
     print("Type numbers separated by comma in the following order:\n")
     print(" white\n pink\n yellow\n purple\n")
     print("Example: 25, 30, 50, 45")
-    print("." * 40)
+    print("." * 50)
 
     bought_num = input("Enter numbers here: ")
     print(f"Your entered {bought_num}\n")
@@ -40,6 +40,7 @@ def valid_data(values):
     or they are not numbers, raises ValueError.
     """
     try:
+        [int(value) for value in values]
         if len(values) != 4:
             raise ValueError(
                 f"You should enter 4 numbers. You entered {len(values)}"
