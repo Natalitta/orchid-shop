@@ -1,5 +1,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
+from pprint import pprint
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -23,7 +24,7 @@ def get_bought_num():
     """
     while True:
         print("." * 50)
-        print("Please enter the number of orchids you ordered to sale.")
+        print("Please enter the number of orchids you ordered for sale.")
         print("Type numbers separated by comma in the following order:\n")
         print(" white\n pink\n yellow\n purple\n")
         print("Example: 25, 30, 50, 45")
@@ -70,6 +71,32 @@ def update_bought_worksheet(bought_data):
     print("Worksheet updated successfully\n")
 
 
-bought_data = get_bought_num()
-bought_data_int = [int(num) for num in bought_data]
-update_bought_worksheet(bought_data_int)
+def calculate_money_spent(bought_money_data):
+    """
+    Calculates money spent for each type to calculate profit later.
+    Takes a number of ordered orchids and multiplies by trade price.
+    Trade price is 7 euros.
+    """
+    print("Calculating costs...\n")
+    bought_money = bought_data * 7
+    bought_money_worksheet = SHEET.worksheet("bought-money")
+    bought_money_worksheet.append_row(bought_money_data)
+    print("Worksheet updated successfully\n")
+
+     
+   
+
+
+def main():
+    """
+    Runs all main functions 
+    """
+    bought_data = get_bought_num()
+    bought_data_int = [int(num) for num in bought_data]
+    update_bought_worksheet(bought_data_int)
+    calculate_money_spent(bought_data_int)
+
+
+print("." * 50)
+print("Welcome to Orchid Shop data automation")
+main()
