@@ -127,6 +127,30 @@ def get_last_week_sales():
     return columns
 
 
+def calculate_recommendation(sales_data):
+    """
+    Calculates the average week's sales for each item colour.
+    Adds 5%
+    """
+    print("." * 50)
+    print("Calculating the average week's sales...\n")
+
+    recommendation = []
+
+    for column in sales_data:
+        int_column = [int(num) for num in column]
+        average = sum(int_column) / 7
+        recomend_num = average * 1.05
+        recommendation.append(round(recomend_num))
+        
+    return recommendation
+
+    print("Updating recommended amount of items to buy...\n")
+    update_recommendation_worksheet = SHEET.worksheet("recommendation")
+    update_recommendation_worksheet.append_row(recommendation)
+    print("Recommendation worksheet updated successfully\n")
+
+
 def get_money_spent(bought_row):
     """
     Calculates money spent for each type.
@@ -158,9 +182,9 @@ def get_money_earned(sales_row):
         sales_money_earned = int(sales) * 9
         sales_money.append(sales_money_earned)
     
-    sales_money_worksheet = SHEET.worksheet("sales-money")
-    sales_money_worksheet.append_row(sales_money)
-    print("Worksheet updated successfully\n")
+    #sales_money_worksheet = SHEET.worksheet("sales-money")
+    #sales_money_worksheet.append_row(sales_money)
+    #print("Worksheet updated successfully\n")
 
 
 def main():
@@ -177,9 +201,12 @@ def main():
     update_worksheet(new_surplus, "surplus")
     money_spent = get_money_spent(bought_data)
     money_earned = get_money_earned(sales_data)   
-
+    sales_cols = get_last_week_sales()
+    recommendation_data = calculate_recommendation(sales_cols)
+    update_worksheet(recommendation_data, "recommend")
+    
 
 print("." * 50)
 print("Welcome to Orchid Shop data automation")
-#main()
-sales_cols = get_last_week_sales()
+main()
+
