@@ -109,7 +109,14 @@ def update_sales_worksheet(sales_data):
 
 
 def calculate_surplus(sales_row):
+    """
+    Calculates surplus subtracting sold items from bought ones.
+    """
+    print("Calculating surplus data...\n")
+    bought = SHEET.worksheet("bought").get_all_values()
+    bought_row = bought[-1]
 
+    #= bought_data - sales_data
 
 """
 def calculate_money_spent(bought_money_data):
@@ -135,6 +142,8 @@ def main():
     sales_data = get_sales_num()
     sales_data_int = [int(num) for num in sales_data]
     update_sales_worksheet(sales_data_int)
+    calculate_surplus(sales_data)
+
     #calculate_money_spent(bought_data_int)
 
 
