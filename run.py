@@ -159,15 +159,15 @@ def get_money_spent(bought_row):
     Updates the worksheet with costs data.
     """
     print("Calculating costs...\n")
+
     bought_money = []
     for bought in bought_row:
         bought_money_spent = int(bought) * 7
         bought_money.append(bought_money_spent)
-    
-    bought_money_worksheet = SHEET.worksheet("bought-money")
-    bought_money_worksheet.append_row(bought_money)
-    print("Worksheet updated successfully\n")
+    print(bought_money)
 
+    return bought_money
+    
 
 def get_money_earned(sales_row):
     """
@@ -177,14 +177,38 @@ def get_money_earned(sales_row):
     Updates the worksheet with new data.
     """
     print("Calculating earned money...\n")
+
     sales_money = []
     for sales in sales_row:
         sales_money_earned = int(sales) * 9
         sales_money.append(sales_money_earned)
+
+    print(sales_money)
+    return sales_money
     
-    #sales_money_worksheet = SHEET.worksheet("sales-money")
-    #sales_money_worksheet.append_row(sales_money)
-    #print("Worksheet updated successfully\n")
+
+def get_profit(bought_money_row, sales_money_row):
+    """  
+    Calculates profit for each item.
+    Calculates total profit.
+    """
+    print("." * 50)
+    print("Calculating profit...\n")
+
+    bought_money_data = SHEET.worksheet("bought-money").get_all_values()
+    bought_money_row = bought_money_data[-1]
+    
+    sales_money_data = SHEET.worksheet("sales-money").get_all_values()
+    sales_money_row = sales_money_data[-1]
+    
+    profit = []
+    for bought_money_row, sales_money_row in zip (bought_money_row, sales_money_row):
+        profit_data = int(sales_money_row) - int(bought_money_row)
+        profit.append(profit_data)
+        print(profit_data)
+
+    return profit
+    print(profit) 
 
 
 def main():
@@ -200,11 +224,14 @@ def main():
     new_surplus = calculate_surplus(sales_data)
     update_worksheet(new_surplus, "surplus")
     money_spent = get_money_spent(bought_data)
-    money_earned = get_money_earned(sales_data)   
+    update_worksheet(money_spent, "bought-money")
+    money_earned = get_money_earned(sales_data)  
+    update_worksheet(money_earned, "sales-money") 
     sales_cols = get_last_week_sales()
     recommendation_data = calculate_recommendation(sales_cols)
     update_worksheet(recommendation_data, "recommend")
-    
+    get_profit(money_spent, money_earned)
+
 
 print("." * 50)
 print("Welcome to Orchid Shop data automation")
