@@ -124,6 +124,18 @@ def calculate_surplus(sales_row):
     return surplus_data   
 
 
+def update_surplus_worksheet(bought_data):
+    """
+    Updates the surplus worksheet with the difference 
+    of items sold compared to bought to stock ones.
+    Adds a new row of data to the list.
+    """
+    print("Updating the worksheet with new information...\n")
+    surplus_worksheet = SHEET.worksheet("surplus")
+    surplus_worksheet.append_row(bought_data)
+    print("Worksheet updated successfully\n")
+
+
 def calculate_money_spent(bought_row):
     """
     Calculates money spent for each type.
@@ -173,8 +185,9 @@ def main():
     sales_data_int = [int(num) for num in sales_data]
     update_sales_worksheet(sales_data_int)
     new_surplus = calculate_surplus(sales_data)
-    calculate_money_spent(bought_data)
-    calculate_money_earned(sales_data)
+    update_surplus_worksheet(new_surplus)
+    money_spent = calculate_money_spent(bought_data)
+    money_earned = calculate_money_earned(sales_data)
 
 
 print("." * 50)
