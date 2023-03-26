@@ -112,6 +112,21 @@ def update_worksheet(bought_data, worksheet):
     print(f"{worksheet} worksheet updated successfully\n")
 
 
+def get_last_week_sales():
+    """
+    Gets columns of data for the last 7 days(a week).
+    Returns the data as a list of lists.
+    """
+    sales = SHEET.worksheet("sales")
+
+    columns = []
+    for ind in range(1, 5):
+        column = sales.col_values(ind)
+        columns.append(column[-7:])
+
+    return columns
+
+
 def get_money_spent(bought_row):
     """
     Calculates money spent for each type.
@@ -166,4 +181,5 @@ def main():
 
 print("." * 50)
 print("Welcome to Orchid Shop data automation")
-main()
+#main()
+sales_cols = get_last_week_sales()
