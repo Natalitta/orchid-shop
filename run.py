@@ -94,7 +94,7 @@ def calculate_surplus(sales_row):
     bought_row = bought[-1]
 
     surplus_data = []
-    for bought, sales in zip (bought_row, sales_row):
+    for bought, sales in zip(bought_row, sales_row):
         surplus = int(bought) - int(sales)
         surplus_data.append(surplus)
 
@@ -202,14 +202,13 @@ def get_profit(bought_money_row, sales_money_row):
     sales_money_row = sales_money_data[-1]
     
     profit = []
-    for bought_money_row, sales_money_row in zip (bought_money_row, sales_money_row):
-        profit_data = int(sales_money_row) - int(bought_money_row)
+    for bought_money, sales_money in zip(bought_money_row, sales_money_row):
+        profit_data = int(sales_money) - int(bought_money)
         profit.append(profit_data)
         print(profit_data)
 
     return profit
-    print(profit) 
-
+    
 
 def main():
     """
@@ -218,19 +217,26 @@ def main():
     bought_data = get_bought_num()
     bought_data_int = [int(num) for num in bought_data]
     update_worksheet(bought_data_int, "bought")
+
     sales_data = get_sales_num()
     sales_data_int = [int(num) for num in sales_data]
     update_worksheet(sales_data_int, "sales")
+
     new_surplus = calculate_surplus(sales_data)
     update_worksheet(new_surplus, "surplus")
+
     money_spent = get_money_spent(bought_data)
     update_worksheet(money_spent, "bought-money")
+
     money_earned = get_money_earned(sales_data)  
-    update_worksheet(money_earned, "sales-money") 
+    update_worksheet(money_earned, "sales-money")
+
     sales_cols = get_last_week_sales()
     recommendation_data = calculate_recommendation(sales_cols)
     update_worksheet(recommendation_data, "recommend")
-    get_profit(money_spent, money_earned)
+
+    profit_item = get_profit(money_spent, money_earned)
+    update_worksheet(profit_item, "profit")
 
 
 print("." * 50)
