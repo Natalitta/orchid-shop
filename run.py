@@ -56,19 +56,7 @@ def valid_data(values):
     except ValueError as e:
         print(f"Invalid data: {e}, try again, please.\n")
         return False
-
     return True
-
-
-def update_bought_worksheet(bought_data):
-    """
-    Updates the bought worksheet with numbers of items bought to stock.
-    Adds a new row of data to the list.
-    """
-    print("Updating the worksheet with new information...\n")
-    bought_worksheet = SHEET.worksheet("bought")
-    bought_worksheet.append_row(bought_data)
-    print("Worksheet updated successfully\n")
 
 
 def get_sales_num():
@@ -97,17 +85,6 @@ def get_sales_num():
     return sales_num_data
 
 
-def update_sales_worksheet(sales_data):
-    """
-    Updates the bought worksheet with numbers of items bought to stock.
-    Adds a new row of data to the list.
-    """
-    print("Updating the worksheet with new information...\n")
-    sales_worksheet = SHEET.worksheet("sales")
-    sales_worksheet.append_row(sales_data)
-    print("Worksheet updated successfully\n")
-
-
 def calculate_surplus(sales_row):
     """
     Calculates surplus subtracting sold items from bought ones.
@@ -124,19 +101,18 @@ def calculate_surplus(sales_row):
     return surplus_data   
 
 
-def update_surplus_worksheet(bought_data):
+def update_worksheet(bought_data, worksheet):
     """
-    Updates the surplus worksheet with the difference 
-    of items sold compared to bought to stock ones.
-    Adds a new row of data to the list.
+    Gets a list of numbers to be inserted into a worksheet.
+    Updates the relevant worksheet.
     """
-    print("Updating the worksheet with new information...\n")
-    surplus_worksheet = SHEET.worksheet("surplus")
-    surplus_worksheet.append_row(bought_data)
-    print("Worksheet updated successfully\n")
+    print(f"Updating the {worksheet} worksheet with new information...\n")
+    worksheet_to_update = SHEET.worksheet(worksheet)
+    worksheet_to_update.append_row(bought_data)
+    print(f"{worksheet} worksheet updated successfully\n")
 
 
-def calculate_money_spent(bought_row):
+def get_money_spent(bought_row):
     """
     Calculates money spent for each type.
     Takes a number of ordered orchids and multiplies by trade price.
@@ -148,14 +124,13 @@ def calculate_money_spent(bought_row):
     for bought in bought_row:
         bought_money_spent = int(bought) * 7
         bought_money.append(bought_money_spent)
-
+    
     bought_money_worksheet = SHEET.worksheet("bought-money")
     bought_money_worksheet.append_row(bought_money)
-    pprint(bought_money)
     print("Worksheet updated successfully\n")
 
 
-def calculate_money_earned(sales_row):
+def get_money_earned(sales_row):
     """
     Calculates money earned for each sold item type.
     Takes a number of sold orchids and multiplies by retail price.
@@ -167,10 +142,9 @@ def calculate_money_earned(sales_row):
     for sales in sales_row:
         sales_money_earned = int(sales) * 9
         sales_money.append(sales_money_earned)
-
+    
     sales_money_worksheet = SHEET.worksheet("sales-money")
     sales_money_worksheet.append_row(sales_money)
-    pprint(sales_money)
     print("Worksheet updated successfully\n")
 
 
@@ -180,14 +154,14 @@ def main():
     """
     bought_data = get_bought_num()
     bought_data_int = [int(num) for num in bought_data]
-    update_bought_worksheet(bought_data_int)
+    update_worksheet(bought_data_int, "bought")
     sales_data = get_sales_num()
     sales_data_int = [int(num) for num in sales_data]
-    update_sales_worksheet(sales_data_int)
+    update_worksheet(sales_data_int, "sales")
     new_surplus = calculate_surplus(sales_data)
-    update_surplus_worksheet(new_surplus)
-    money_spent = calculate_money_spent(bought_data)
-    money_earned = calculate_money_earned(sales_data)
+    update_worksheet(new_surplus, "surplus")
+    money_spent = get_money_spent(bought_data)
+    money_earned = get_money_earned(sales_data)   
 
 
 print("." * 50)
