@@ -121,25 +121,29 @@ def calculate_surplus(sales_row):
         surplus = int(bought) - int(sales)
         surplus_data.append(surplus)
 
-    return surplus_data
-    
+    return surplus_data   
 
 
-    #= bought_data - sales_data
-
-"""
-def calculate_money_spent(bought_money_data):
-    
-    Calculates money spent for each type to calculate profit later.
+def calculate_money_spent(bought_row):
+    """
+    Calculates money spent for each type.
     Takes a number of ordered orchids and multiplies by trade price.
     Trade price is 7 euros.
-    
+    Updates the worksheet with costs data.
+    """
     print("Calculating costs...\n")
-    bought_money = bought_data * 7
+    bought_money = []
+    for bought in bought_row:
+        bought_money_spent = int(bought) * 7
+        bought_money.append(bought_money_spent)
+
+    print(bought_money)
+
     bought_money_worksheet = SHEET.worksheet("bought-money")
-    bought_money_worksheet.append_row(bought_money_data)
+    bought_money_worksheet.append_row(bought_money)
+    pprint(bought_money)
     print("Worksheet updated successfully\n")
-"""
+
 
 def main():
     """
@@ -152,9 +156,7 @@ def main():
     sales_data_int = [int(num) for num in sales_data]
     update_sales_worksheet(sales_data_int)
     new_surplus = calculate_surplus(sales_data)
-    print(new_surplus)
-
-    #calculate_money_spent(bought_data_int)
+    calculate_money_spent(bought_data)
 
 
 print("." * 50)
