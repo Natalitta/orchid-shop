@@ -116,6 +116,15 @@ def calculate_surplus(sales_row):
     bought = SHEET.worksheet("bought").get_all_values()
     bought_row = bought[-1]
 
+    surplus_data = []
+    for bought, sales in zip (bought_row, sales_row):
+        surplus = int(bought) - int(sales)
+        surplus_data.append(surplus)
+
+    return surplus_data
+    
+
+
     #= bought_data - sales_data
 
 """
@@ -142,7 +151,8 @@ def main():
     sales_data = get_sales_num()
     sales_data_int = [int(num) for num in sales_data]
     update_sales_worksheet(sales_data_int)
-    calculate_surplus(sales_data)
+    new_surplus = calculate_surplus(sales_data)
+    print(new_surplus)
 
     #calculate_money_spent(bought_data_int)
 
