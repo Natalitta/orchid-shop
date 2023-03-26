@@ -137,11 +137,28 @@ def calculate_money_spent(bought_row):
         bought_money_spent = int(bought) * 7
         bought_money.append(bought_money_spent)
 
-    print(bought_money)
-
     bought_money_worksheet = SHEET.worksheet("bought-money")
     bought_money_worksheet.append_row(bought_money)
     pprint(bought_money)
+    print("Worksheet updated successfully\n")
+
+
+def calculate_money_earned(sales_row):
+    """
+    Calculates money earned for each sold item type.
+    Takes a number of sold orchids and multiplies by retail price.
+    Retail price is 9 euros.
+    Updates the worksheet with new data.
+    """
+    print("Calculating earned money...\n")
+    sales_money = []
+    for sales in sales_row:
+        sales_money_earned = int(sales) * 9
+        sales_money.append(sales_money_earned)
+
+    sales_money_worksheet = SHEET.worksheet("sales-money")
+    sales_money_worksheet.append_row(sales_money)
+    pprint(sales_money)
     print("Worksheet updated successfully\n")
 
 
@@ -157,6 +174,7 @@ def main():
     update_sales_worksheet(sales_data_int)
     new_surplus = calculate_surplus(sales_data)
     calculate_money_spent(bought_data)
+    calculate_money_earned(sales_data)
 
 
 print("." * 50)
