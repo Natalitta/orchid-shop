@@ -1,6 +1,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
-from pprint import pprint
+
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -19,7 +19,7 @@ def get_bought_num():
     Requests a number from the user
     for each colour of orchids bought to the stock.
     A while loop will ask for the input all over again
-    until the data entered is valid. 
+    until the data entered is valid.
     There must be exactly 4 numbers separated by commas.
     """
     while True:
@@ -34,7 +34,7 @@ def get_bought_num():
         print(f"Your entered {bought_num}\n")
 
         bought_num_data = bought_num.split(",")
-        
+
         if valid_data(bought_num_data):
             print("Data is valid\n")
             break
@@ -44,7 +44,7 @@ def get_bought_num():
 def valid_data(values):
     """
     Validates the user's input to be a list of 4 numbers.
-    If there are not exactly 4 numbers 
+    If there are not exactly 4 numbers
     or they are not numbers, raises ValueError.
     """
     try:
@@ -63,7 +63,7 @@ def get_sales_num():
     """
     Requests a number from the user for each colour of orchids sold.
     A while loop will ask for the input all over again
-    until the data entered is valid. 
+    until the data entered is valid.
     There must be exactly 4 numbers separated by commas.
     """
     while True:
@@ -78,7 +78,6 @@ def get_sales_num():
         print(f"Your entered {sales_num}\n")
 
         sales_num_data = sales_num.split(",")
-        
         if valid_data(sales_num_data):
             print("Data is valid\n")
             break
@@ -97,8 +96,7 @@ def calculate_surplus(sales_row):
     for bought, sales in zip(bought_row, sales_row):
         surplus = int(bought) - int(sales)
         surplus_data.append(surplus)
-
-    return surplus_data   
+    return surplus_data
 
 
 def update_worksheet(bought_data, worksheet):
@@ -142,10 +140,10 @@ def calculate_recommendation(sales_data):
         average = sum(int_column) / 7
         recommend_num = average * 1.05
         recommendation.append(round(recommend_num))
-        
+
     return recommendation
 
-    
+
 def get_money_spent(bought_row):
     """
     Calculates money spent for each type.
@@ -162,7 +160,7 @@ def get_money_spent(bought_row):
     print(bought_money)
 
     return bought_money
-    
+
 
 def get_money_earned(sales_row):
     """
@@ -180,10 +178,10 @@ def get_money_earned(sales_row):
 
     print(sales_money)
     return sales_money
-    
+
 
 def get_profit(bought_money_row, sales_money_row):
-    """  
+    """
     Calculates profit for each item.
     Calculates total profit.
     """
@@ -192,21 +190,19 @@ def get_profit(bought_money_row, sales_money_row):
 
     bought_money_data = SHEET.worksheet("bought-money").get_all_values()
     bought_money_row = bought_money_data[-1]
-    
     sales_money_data = SHEET.worksheet("sales-money").get_all_values()
     sales_money_row = sales_money_data[-1]
-    
+
     profit = []
     for bought_money, sales_money in zip(bought_money_row, sales_money_row):
         profit_data = int(sales_money) - int(bought_money)
         profit.append(profit_data)
-        
     return profit
 
 
 def day_profit(profit_item):
     """
-    Calculates the total profit for the day.    
+    Calculates the total profit for the day.
     """
     print("." * 50)
     print("Calculating day profit...\n")
@@ -215,11 +211,11 @@ def day_profit(profit_item):
     print(f"Earned today: {total_day_profit} euros in total.")
 
     return total_day_profit
-    
+
 
 def main():
     """
-    Runs all main functions 
+    Runs all main functions
     """
     bought_data = get_bought_num()
     bought_data_int = [int(num) for num in bought_data]
@@ -235,7 +231,7 @@ def main():
     money_spent = get_money_spent(bought_data)
     update_worksheet(money_spent, "bought-money")
 
-    money_earned = get_money_earned(sales_data)  
+    money_earned = get_money_earned(sales_data)
     update_worksheet(money_earned, "sales-money")
 
     sales_cols = get_last_week_sales()
@@ -244,11 +240,9 @@ def main():
 
     profit_item = get_profit(money_spent, money_earned)
     update_worksheet(profit_item, "profit")
-    
-    day_profit(profit_item)    
+    day_profit(profit_item)
 
 
 print("." * 50)
 print("Welcome to Orchid Shop data automation")
 main()
-
