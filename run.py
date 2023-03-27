@@ -245,9 +245,7 @@ def main():
     profit_item = get_profit(money_spent, money_earned)
     update_worksheet(profit_item, "profit")
     
-    day_profit(profit_item)
-    update_profit(day_profit)
-    
+    day_profit(profit_item)    
 
 
 print("." * 50)
