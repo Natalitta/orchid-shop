@@ -140,17 +140,12 @@ def calculate_recommendation(sales_data):
     for column in sales_data:
         int_column = [int(num) for num in column]
         average = sum(int_column) / 7
-        recomend_num = average * 1.05
-        recommendation.append(round(recomend_num))
+        recommend_num = average * 1.05
+        recommendation.append(round(recommend_num))
         
     return recommendation
 
-    print("Updating recommended amount of items to buy...\n")
-    update_recommendation_worksheet = SHEET.worksheet("recommendation")
-    update_recommendation_worksheet.append_row(recommendation)
-    print("Recommendation worksheet updated successfully\n")
-
-
+    
 def get_money_spent(bought_row):
     """
     Calculates money spent for each type.
@@ -205,9 +200,21 @@ def get_profit(bought_money_row, sales_money_row):
     for bought_money, sales_money in zip(bought_money_row, sales_money_row):
         profit_data = int(sales_money) - int(bought_money)
         profit.append(profit_data)
-        print(profit_data)
-
+        
     return profit
+
+
+def day_profit(profit_item):
+    """
+    Calculates the total profit for the day.    
+    """
+    print("." * 50)
+    print("Calculating day profit...\n")
+
+    total_day_profit = sum(profit_item)
+    print(f"Earned today: {total_day_profit} euros in total.")
+
+    return total_day_profit
     
 
 def main():
@@ -237,6 +244,10 @@ def main():
 
     profit_item = get_profit(money_spent, money_earned)
     update_worksheet(profit_item, "profit")
+    
+    day_profit(profit_item)
+    update_profit(day_profit)
+    
 
 
 print("." * 50)
