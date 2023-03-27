@@ -1,31 +1,78 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Orchid Shop data automation application
 
-Welcome Natalitta,
+This is a terminal application to track shop sales, calculate expenses and profit, figure out recommended amount to have in stock. 
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **August 17, 2021**
+All data provided through the terminal input goes into a google spreadsheet.
 
-## Reminders
+This is the link to the live app:
 
-* Your code must be placed in the `run.py` file
-* Your dependencies must be placed in the `requirements.txt` file
-* Do not edit any of the other files or your code may not deploy properly
+/link/
 
-## Creating the Heroku app
+## How to use the app
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+The app is based on the data the user provides in inputs.
+There are 2 inputs:
 
-1. `heroku/python`
-2. `heroku/nodejs`
+1. Numbers of items bought to the stock of each type. In total 4 numbers must be provided.
+2. Numbers of items sold of each type. In total 4 numbers.
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
+According to the data provided the application calculates:
+* the recommended ammount of items to have in stock with additional 5% to increase sales (according to last week sales);
+* the expenses and income according to the trade (7 euros) and retail (9 euros) prices;
+* the profit gained from every item and in total for the day.
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
+Then the results are inserted into google spreadsheet in relevant worksheets.
 
-Connect your GitHub repository and deploy as normal.
+## Features
 
-## Constraints
+### Accepts user input.
 
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
+ <img src="img/1-input.png">
 
------
-Happy coding!
+### Validates input.
+    1. Checks if there are exactly 4 numbers separated by commas.
+    2. Checks if the data provided is a number.
+    3. If there's a mistake an error is raised. And the input request repeats.
+
+ <img src="img/empty-input.png">
+
+### Calculates recommended stock, day expenses, income, and profit.
+
+ <img src="img/money.png">
+ 
+ ### Data is uploaded to the google spreadsheet.
+
+ <img src="img/worksheet.png">
+
+## Testing
+
+I have tested this application manually.
+
+* Used PEP8 linter and confirmes that there no errors.
+
+<img src="img/python-check.png">
+
+* Tested in my gitPod terminal and Heroku terminal.
+* Tested invalid inputs:
+    * Empty input - Invalid data error is raised and data is requested again.
+    <img src="img/empty-input.png">
+
+    * Too many or not enough numbers - Invalid data error is raised, it shows how many the user entered and reminds to enter 4 numbers, then data is requested again.
+    <img src="img/number-error.png">
+
+    * A letter instead of a number - Invalid data error is raised, it shows what the user entered and reminds to enter numbers, then data is requested again.
+    <img src="img/letter-error.png">
+
+    *  A symbol instead of a number - Invalid data error is raised, it shows what the user entered and reminds to enter numbers, then data is requested again.
+    <img src="img/symbol-error.png">
+
+## Bugs
+
+No bugs remaining
+
+## Deployment
+
+## Credits
+Code Institute for student template.
+
+
