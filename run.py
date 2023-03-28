@@ -30,7 +30,7 @@ def get_bought_num():
         print("Example: 25, 30, 50, 45")
         print("." * 50)
 
-        bought_num = input("Enter numbers here: ")
+        bought_num = input("Enter numbers here:\n")
         print(f"Your entered {bought_num}\n")
 
         bought_num_data = bought_num.split(",")
@@ -74,7 +74,7 @@ def get_sales_num():
         print("Example: 25, 30, 50, 45")
         print("." * 50)
 
-        sales_num = input("Enter numbers here: ")
+        sales_num = input("Enter numbers here:\n")
         print(f"Your entered {sales_num}\n")
 
         sales_num_data = sales_num.split(",")
