@@ -96,6 +96,7 @@ def calculate_surplus(sales_row):
     for bought, sales in zip(bought_row, sales_row):
         surplus = int(bought) - int(sales)
         surplus_data.append(surplus)
+    print(f"Surplus: {surplus_data}\n")
     return surplus_data
 
 
@@ -197,6 +198,8 @@ def get_profit(bought_money_row, sales_money_row):
     for bought_money, sales_money in zip(bought_money_row, sales_money_row):
         profit_data = int(sales_money) - int(bought_money)
         profit.append(profit_data)
+
+    print(f"Your profit is {profit}\n")
     return profit
 
 
@@ -220,7 +223,6 @@ def update_total_profit(profit_item, total):
     """
     print("Updating the profit worksheet with new total day profit...\n")
     profit_item.append(total)
-    
     update_total = SHEET.worksheet("profit")
     update_total.append_row(profit_item)
     print("Profit worksheet updated successfully.\n")
@@ -254,6 +256,14 @@ def main():
     profit_item = get_profit(money_spent, money_earned)
     total = day_profit(profit_item)
     update_total_profit(profit_item, total)
+
+    print("." * 50)
+    print(f"Well done! Your profit: {total}.")
+    print("To gain even more:\n")
+    print(f"You should buy {recommendation_data[0]} white orchids to stock.")
+    print(f"You should buy {recommendation_data[1]} pink orchids to stock.")
+    print(f"You should buy {recommendation_data[2]} yellow orchids to stock.")
+    print(f"You should buy {recommendation_data[3]} purple orchids to stock.")
 
 
 print("." * 50)

@@ -48,7 +48,7 @@ Then the results are inserted into google spreadsheet in relevant worksheets.
 
 I have tested this application manually.
 
-* Used PEP8 linter and confirmes that there no errors.
+* Used PEP8 linter and confirms that there no errors.
 
 <img src="img/python-check.png">
 
@@ -68,7 +68,7 @@ I have tested this application manually.
 
 ## Bugs
 
-No bugs remaining
+No bugs.
 
 ## Deployment
 
