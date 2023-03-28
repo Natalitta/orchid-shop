@@ -208,9 +208,22 @@ def day_profit(profit_item):
     print("Calculating day profit...\n")
 
     total_day_profit = sum(profit_item)
-    print(f"Earned today: {total_day_profit} euros in total.")
+    print(f"Earned today: {total_day_profit} euros in total.\n")
 
     return total_day_profit
+
+
+def update_total_profit(profit_item, total):
+    """
+    Updates the profit worksheet with total day profit.
+    Adds it to a separate column.
+    """
+    print("Updating the profit worksheet with new total day profit...\n")
+    profit_item.append(total)
+    
+    update_total = SHEET.worksheet("profit")
+    update_total.append_row(profit_item)
+    print("Profit worksheet updated successfully.\n")
 
 
 def main():
@@ -239,8 +252,8 @@ def main():
     update_worksheet(recommendation_data, "recommend")
 
     profit_item = get_profit(money_spent, money_earned)
-    update_worksheet(profit_item, "profit")
-    day_profit(profit_item)
+    total = day_profit(profit_item)
+    update_total_profit(profit_item, total)
 
 
 print("." * 50)
