@@ -4,6 +4,8 @@ This is a terminal application to track shop sales, calculate expenses and profi
 
 All data provided through the terminal input goes into a google spreadsheet.
 
+In the end, the user gets the total day profit of the day and recommendations for stock printed to the terminal for user's convenience so that they do not have to open the spreadsheet.
+
 This is the link to the live app:
 
 /link/
@@ -36,9 +38,17 @@ Then the results are inserted into google spreadsheet in relevant worksheets.
 
  <img src="img/empty-input.png">
 
-### Calculates recommended stock, day expenses, income, and profit.
+### Calculates money spent and earned for each item.
 
  <img src="img/money.png">
+
+### Calculates profit for each item and total for the day.
+
+ <img src="img/profit.png">
+
+### Calculates recommended stock and gives recommendations of quantity to buy next time.
+
+ <img src="img/conclusion.png">
  
  ### Data is uploaded to the google spreadsheet.
 
@@ -53,7 +63,9 @@ I have tested this application manually.
 <img src="img/python-check.png">
 
 * Tested in my gitPod terminal and Heroku terminal.
+
 * Tested invalid inputs:
+
     * Empty input - Invalid data error is raised and data is requested again.
     <img src="img/empty-input.png">
 
@@ -66,13 +78,42 @@ I have tested this application manually.
     *  A symbol instead of a number - Invalid data error is raised, it shows what the user entered and reminds to enter numbers, then data is requested again.
     <img src="img/symbol-error.png">
 
+* Tested calculations manually with a calculator.
+
+For example: the total profit of the 1st day is a sum of all items:
+
+<img src="img/worksheet.png">
+
+The function worked as expected and calculator confirmed this result.
+
+64 + 73 + 28 + 91 = 256
+
+<img src="img/calculator.png">
+
+
 ## Bugs
 
 No bugs.
 
 ## Deployment
 
+This application is deployed to Heroku. The following steps were taken:
+
+    1. Go to Heroku and to create a new app clicking "New".
+    2. Choose a name and region for an app, click "Create app".
+    3. Go to "Settings" and navigate to Config Vars. Add the following config variables:
+        PORT : 8000
+        CREDS : code from creds.json file
+    4. Go to Buildpacks and add some for first Python and then NodeJS.
+    5. Open "Deploy" tab. Select Github as the deployment method to, search for repository by its name and connect.
+    6. Choose Enable Automatic Deploys, main branch.
+    7. The app is successfully deployed to Heroku.
+
 ## Credits
-Code Institute for student template.
+Code Institute for student template 
+Code Institute Love Sandwiches tutorial.
+gspread
+
+
 
 

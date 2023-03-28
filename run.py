@@ -258,7 +258,7 @@ def main():
     update_total_profit(profit_item, total)
 
     print("." * 50)
-    print(f"Well done! Your profit: {total}.")
+    print(f"Well done! Your profit: {total} euros.\n")
     print("To gain even more:\n")
     print(f"You should buy {recommendation_data[0]} white orchids to stock.")
     print(f"You should buy {recommendation_data[1]} pink orchids to stock.")
