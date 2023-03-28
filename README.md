@@ -25,6 +25,10 @@ According to the data provided the application calculates:
 
 Then the results are inserted into google spreadsheet in relevant worksheets.
 
+## Application logic flow
+
+<img src="img/Flowchart.jpeg">
+
 ## Features
 
 ### Accepts user input.
@@ -111,7 +115,9 @@ This application is deployed to Heroku. The following steps were taken:
 
 ## Credits
 Code Institute for student template 
+
 Code Institute Love Sandwiches tutorial.
+
 gspread
 
 
