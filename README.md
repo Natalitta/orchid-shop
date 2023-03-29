@@ -138,9 +138,13 @@ So the bug was that there were 2 lines for this day: one with 4 values and the n
 This bug was fixed by removing update function after calculating items profit.
 
 Now the order is:
+
     calculate items profit
+    
     calculate total day profit
+    
     update worksheet
+    
 
 No bugs remaining.
 
