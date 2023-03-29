@@ -6,9 +6,11 @@ All data provided through the terminal input goes into a google spreadsheet.
 
 In the end, the user gets the total day profit of the day and recommendations for stock printed to the terminal for user's convenience so that they do not have to open the spreadsheet.
 
+<img src="img/screenshot.png">
+
 This is the link to the live app:
 
-/link/
+https://orchid-shop-app.herokuapp.com/
 
 ## Application goals:
 
@@ -96,6 +98,8 @@ I have tested this application manually.
 
 * Tested in my gitpod terminal and Heroku terminal.
 
+<img src="img/screenshot-error.png">
+
 * Tested invalid inputs:
 
     * Empty input - Invalid data error is raised and data is requested again.
@@ -150,9 +154,10 @@ This application is deployed to Heroku. The following steps were taken:
         PORT : 8000
         CREDS : code from creds.json file
     4. Go to Buildpacks and add some for first Python and then NodeJS.
-    5. Open "Deploy" tab. Select Github as the deployment method to, search for repository by its name and connect.
+    5. Open "Deploy" tab. Select Github as the deployment method, authorize and search for repository by its name and connect.
     6. Choose Enable Automatic Deploys, main branch.
-    7. The app is successfully deployed to Heroku.
+    7. Click Deploy a GitHub branch (main).
+    8. The app was successfully deployed. Click View.
 
 
 ## Technologies:
