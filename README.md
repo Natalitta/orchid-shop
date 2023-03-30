@@ -2,7 +2,7 @@
 
 This is a terminal application to track shop sales, calculate expenses and profit, figure out recommended amount to have in stock. 
 
-All data provided through the terminal input goes into a google spreadsheet.
+All data provided through the terminal inputs goes into a google spreadsheet.
 
 In the end, the user gets the total day profit of the day and recommendations for stock printed to the terminal for user's convenience so that they do not have to open the spreadsheet.
 
@@ -55,7 +55,7 @@ The results are inserted into google spreadsheet and saved in relevant worksheet
 
 ## Application logic flow
 
-<img src="img/Flowchart.jpeg">
+<img src="img/flowchart.png">
 
 ## Features:
 
@@ -68,7 +68,7 @@ Simple, easy to use application with clear navigation.
 ### Validates input.
     1. Checks if there are exactly 4 numbers separated by commas.
     2. Checks if the data provided is a number.
-    3. If there's a mistake an error is raised. And the input request repeats.
+    3. If there's a mistake, an error is raised. And the input request repeats.
 
  <img src="img/empty-input.png">
 
@@ -152,7 +152,7 @@ No bugs remaining.
 
 This application is deployed to Heroku. The following steps were taken:
 
-    1. Go to Heroku and to create a new app clicking "New".
+    1. Go to Heroku and create a new app clicking "New".
     2. Choose a name and region for an app, click "Create app".
     3. Go to "Settings" and navigate to Config Vars. Add the following config variables:
         PORT : 8000
@@ -161,7 +161,7 @@ This application is deployed to Heroku. The following steps were taken:
     5. Open "Deploy" tab. Select Github as the deployment method, authorize and search for repository by its name and connect.
     6. Choose Enable Automatic Deploys, main branch.
     7. Click Deploy a GitHub branch (main).
-    8. The app was successfully deployed. Click View.
+    8. The app was successfully deployed. Click View to see it.
 
 
 ## Technologies:
@@ -176,8 +176,6 @@ This application is deployed to Heroku. The following steps were taken:
 
 Code Institute for student template 
 
-Code Institute Love Sandwiches tutorial.
+Code Institute Love Sandwiches tutorial
 
 W3C was used as a reference for python functions.
-
-
